@@ -1,7 +1,6 @@
 # Create your models here.
 """Data base models"""
 
-from typing import Any
 from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser,
