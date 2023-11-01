@@ -21,6 +21,11 @@ class UserSerializer(serializers.ModelSerializer):
         """Create and return a user with encrypted password."""
         return get_user_model().objects.create_user(**validated_data)
 
+    def get_users(self):
+        """Get all users."""
+        users = get_user_model().objects.all()
+        return users
+
     def update(self, instance, validated_data):
         """Update and return user"""
         password = validated_data.pop("password", None)
@@ -52,6 +57,5 @@ class AuthTokenSerializer(serializers.Serializer):
         if not user:
             msg = _("Unable to authenticate with provided credentials.")
             raise serializers.ValidationError(msg, code="authorization")
-
         attrs["user"] = user
         return attrs
